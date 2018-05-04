@@ -1,20 +1,3 @@
-/*!
-
- =========================================================
- * Material Dashboard Angular - V1.2.0
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/material-dashboard-angular2
- * Copyright 2017 Creative Tim (https://www.creative-tim.com)
- * Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-angular/blob/master/LICENSE.md)
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
- */
-
-
 $(document).ready(function(){
     $moving_tab = $('<div class="moving-tab"/>');
     $('.sidebar .nav-container').append($moving_tab);
@@ -53,7 +36,7 @@ function animationSidebar($this, animate){
     // console.log('incep animatia si butonul pe care sunt acum este:', $this[0].href );
     if(!$this.parent('li').position())
         return;
-        
+
     $current_li_distance = $this.parent('li').position().top - 10;
 
     button_text = $this.html();
