@@ -1,0 +1,86 @@
+.card-title {
+  display: inline;
+}
+
+.progress {
+  overflow: hidden;
+}
+
+.progress-bar {
+  -ms-flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+}
+
+.progress-bar {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+}
+
+.progress,
+.progress-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+}
+
+.progress {
+  display: flex;
+  font-size: 0.75rem;
+  background-color: #e9ecef;
+}
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  background-color: #2196f3;
+  -webkit-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
+
+.progress {
+  height: 4px;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: #ddd;
+  margin-bottom: 20px;
+}
+.progress .progress-bar {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.progress .progress-bar.progress-bar-primary {
+  background: #9c27b0 !important;
+}
+.progress .progress-bar.progress-bar-info {
+  background: #00bcd4;
+}
+.progress .progress-bar.progress-bar-success {
+  background: #4caf50;
+}
+.progress .progress-bar.progress-bar-warning {
+  background: #ff9800;
+}
+.progress .progress-bar.progress-bar-danger {
+  background: #f44336;
+}
+.progress.progress-line-primary {
+  background: rgba(156, 39, 176, 0.2);
+}
+.progress.progress-line-info {
+  background: rgba(0, 188, 212, 0.2);
+}
+.progress.progress-line-success {
+  background: rgba(76, 175, 80, 0.2);
+}
+.progress.progress-line-warning {
+  background: rgba(255, 152, 0, 0.2);
+}
+.progress.progress-line-danger {
+  background: rgba(244, 67, 54, 0.2);
+}
