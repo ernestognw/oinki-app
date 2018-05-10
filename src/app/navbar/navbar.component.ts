@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { UserdataService } from '../services/userdata.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,8 +11,12 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 export class NavbarComponent implements OnInit {
   location: Location;
 
-  constructor(location: Location) {
+  constructor(location: Location, private userdataService: UserdataService) {
     this.location = location;
+  }
+
+  logout() {
+    this.userdataService.logout();
   }
 
   ngOnInit() {

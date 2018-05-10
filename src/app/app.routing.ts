@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BalanceComponent } from './balance/balance.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'balance', component: BalanceComponent },
+      { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

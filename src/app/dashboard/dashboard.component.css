@@ -1,4 +1,5 @@
-.card-title {
+.card-title,
+.currency {
   display: inline;
 }
 

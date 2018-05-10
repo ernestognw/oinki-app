@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LocationStrategy, PlatformLocation, Location} from '@angular/common';
+import { UserdataService } from './services/userdata.service';
 
 declare var $: any;
 
@@ -11,9 +12,25 @@ declare var $: any;
 export class AppComponent implements OnInit {
   title = 'Oinkii';
   location: Location;
+  loggedIn = false;
+  currentUser = null;
 
-  constructor(location: Location) {
+  constructor(location: Location, private userdataService: UserdataService) {
     this.location = location;
+    this.userdataService.isLogged()
+    .subscribe((result) => {
+      if (result && result.uid) {
+        this.loggedIn = true;
+        this.currentUser = userdataService.getUserData();
+      } else {
+        this.loggedIn = false;
+      }
+    }, (error) => {
+      this.loggedIn = false;
+    });
+  }
+  logout() {
+    this.userdataService.logout();
   }
 
   ngOnInit() {
