@@ -29,9 +29,6 @@ export class AppComponent implements OnInit {
       this.loggedIn = false;
     });
   }
-  logout() {
-    this.userdataService.logout();
-  }
 
   ngOnInit() {
     $.getScript('../../../assets/js/material-dashboard.js');
