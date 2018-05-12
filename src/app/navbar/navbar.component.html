@@ -11,7 +11,7 @@
       </div>
       <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-              <li>
+              <!-- <li>
                   <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="material-icons">dashboard</i>
                       <p class="hidden-lg hidden-md">Dashboard</p>
@@ -30,18 +30,33 @@
                       <li><a href="#">Another Notification</a></li>
                       <li><a href="#">Another One</a></li>
                   </ul>
-              </li>
-              <li class="nav-item">
-                  <a (click)="logout()" class="dropdown-toggle" data-toggle="dropdown">
+              </li> -->
+              <li *ngIf="!loggedIn" class="nav-item">
+                  <a routerLink="login" class="dropdown-toggle" data-toggle="dropdown">
                      <i class="material-icons">account_circle</i>
-                     <p class="hidden-lg hidden-md">Login</p>
+                     <p>Login</p>
                   </a>
               </li>
-              <li class="nav-item">
-                  <a routerLink="login" class="btn btn-raised btn-round btn-default">Login</a>
+
+              <li *ngIf="!loggedIn" class="nav-item highlight">
+                  <a routerLink="register" class="dropdown-toggle" data-toggle="dropdown">
+                     <i class="material-icons">person_add</i>
+                     <p>Regístrate</p>
+                  </a>
               </li>
-              <li class="nav-item">
-                  <a routerLink="register" class="btn btn-raised btn-round btn-primary">Regístrate</a>
+
+              <li *ngIf="loggedIn" class="dropdown nav-item highlight">
+                  <a class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown">
+                    <img *ngIf="currentUser.photoURL" width="30" height="30" src="{{ currentUser.photoURL }}" alt="Circle Image" class="rounded-circle img-fluid">
+                    <p class="profile-name">{{ currentUser.displayName }}</p>
+                    <br>
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-right">
+                      <h6 class="dropdown-header">{{ currentUser.displayName }}</h6>
+                      <a routerLink="/profile/{{ id }}" class="dropdown-item"><i class="material-icons">face</i>Perfil de Usuario</a>
+                      <a (click)="logout()" class="dropdown-item"><i class="material-icons">exit_to_app</i>Salir de mi cuenta</a>
+                  </div>
               </li>
           </ul>
 

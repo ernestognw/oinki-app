@@ -10,9 +10,24 @@ import { UserdataService } from '../services/userdata.service';
 })
 export class NavbarComponent implements OnInit {
   location: Location;
+  loggedIn: boolean;
+  currentUser: any;
+  id = null;
 
   constructor(location: Location, private userdataService: UserdataService) {
     this.location = location;
+    this.userdataService.isLogged()
+    .subscribe((result) => {
+      if (result && result.uid) {
+        this.loggedIn = true;
+        this.currentUser = this.userdataService.getUserData();
+        this.id = this.currentUser.uid;
+      } else {
+        this.loggedIn = false;
+      }
+    }, (error) => {
+      this.loggedIn = false;
+    });
   }
 
   logout() {

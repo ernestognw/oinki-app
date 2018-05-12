@@ -1,0 +1,46 @@
+a {
+  text-transform: none;
+}
+
+p {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.dropdown-item {
+  z-index: 1000;
+}
+
+.log-button {
+  font-weight: 100;
+  padding: 15px 2px;
+}
+
+.navbar {
+  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.12);
+}
+
+.highlight {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  background-color: rgba(240, 240, 240, 0.5);
+}
+
+.rounded-circle {
+  border-radius: 50%;
+}
+
+.material-icons {
+  font-size: 18px;
+  padding: 2px;
+  margin-right: 2px;
+}
+
+.profile-name {
+  text-transform: none;
+  padding: 1rem;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}

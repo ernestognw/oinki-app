@@ -12,22 +12,9 @@ declare var $: any;
 export class AppComponent implements OnInit {
   title = 'Oinkii';
   location: Location;
-  loggedIn = false;
-  currentUser = null;
 
-  constructor(location: Location, private userdataService: UserdataService) {
+  constructor(location: Location, public userdataService: UserdataService) {
     this.location = location;
-    this.userdataService.isLogged()
-    .subscribe((result) => {
-      if (result && result.uid) {
-        this.loggedIn = true;
-        this.currentUser = userdataService.getUserData();
-      } else {
-        this.loggedIn = false;
-      }
-    }, (error) => {
-      this.loggedIn = false;
-    });
   }
 
   ngOnInit() {

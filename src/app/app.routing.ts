@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile/:id', component: ProfileComponent },
       { path: 'balance', component: BalanceComponent },
       { path: 'login', component: LoginComponent },
 ];
