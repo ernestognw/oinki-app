@@ -19,11 +19,11 @@ export class BalancedataService {
       .valueChanges().subscribe(profile => {
         this.totalAmount = profile;
         this.totalAmount = this.totalAmount.app_data.income.totalIncome;
-        console.log(this.totalAmount);
-        this.totalAmount = this.totalAmount + income.quantity;
-        this.afDB.database.ref('users/' + this.uid + '/app_data/income/' + income.id).set(income);
-        this.afDB.database.ref('users/' + this.uid + '/app_data/income/totalIncome').set(this.totalAmount);
       });
+      console.log(this.totalAmount);
+      this.totalAmount = this.totalAmount + income.quantity;
+      this.afDB.database.ref('users/' + this.uid + '/app_data/income/' + income.id).set(income);
+      this.afDB.database.ref('users/' + this.uid + '/app_data/income/totalIncome').set(this.totalAmount);
     alert('Ingreso registrado correctamente');
   }
 
