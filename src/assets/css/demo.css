@@ -5,6 +5,30 @@ my-app .main-panel .main-content .card{
     animation-fill-mode: forwards;
 }
 
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+    margin-top: -1rem;
+    margin-right: -1rem;
+    margin-bottom: -1rem;
+    margin-left: auto;
+}
+
+.modal-title {
+  position: fixed;
+}
+
+.modal-header {
+  margin-bottom: 20px;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -88,4 +112,8 @@ my-app .main-panel .main-content .card{
 }
 .tim-row h3{
     margin-top: 0;
+}
+.modal-backdrop {
+  position: inherit;
+  z-index: 4;
 }

@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { BalanceComponent } from './balance/balance.component';
 import { LoginComponent } from './login/login.component';
 import { UserdataService } from './services/userdata.service';
+import { BalancedataService } from './services/balancedata.service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyA2pxoxjhqzfQymUyfRFEK2RSLQ6eP4EcQ',
@@ -51,7 +52,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
   ],
-  providers: [UserdataService],
+  providers: [UserdataService, BalancedataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

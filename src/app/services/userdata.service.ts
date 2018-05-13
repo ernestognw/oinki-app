@@ -4,21 +4,21 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase/app';
+import { BalancedataService } from './balancedata.service';
 
 @Injectable()
 export class UserdataService {
   API_ENDPOINT = 'https://oinkiimx.firebaseio.com/';
   showbars = true;
   currentUser: any = {};
-  loggedIn = null;
-  id = null;
+  balance: any = {};
 
   constructor(
     private afDB: AngularFireDatabase,
     private router: Router,
     private angularFireAuth: AngularFireAuth,
   ) {
-    this.isLogged();
+    this.balance = false;
   }
 
   public facebookLogin() {
@@ -29,9 +29,15 @@ export class UserdataService {
         console.log(result);
         alert('Usuario loggeado con Facebook');
         if (result.additionalUserInfo.isNewUser) {
-          this.afDB.database
-            .ref('users/' + result.user.uid)
-            .set(result.additionalUserInfo.profile);
+          result.additionalUserInfo.profile.app_data = {
+            income: {
+              totalIncome: 0
+            },
+            expenses: {
+              totalExpenses: 0
+            }
+          },
+          this.afDB.database.ref('users/' + result.user.uid).set(result.additionalUserInfo.profile);
         }
         this.router.navigate(['dashboard']);
       })

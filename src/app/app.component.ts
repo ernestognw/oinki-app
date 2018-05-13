@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LocationStrategy, PlatformLocation, Location} from '@angular/common';
 import { UserdataService } from './services/userdata.service';
+import { BalancedataService } from './services/balancedata.service';
 
 declare var $: any;
 
@@ -13,8 +14,16 @@ export class AppComponent implements OnInit {
   title = 'Oinkii';
   location: Location;
 
-  constructor(location: Location, public userdataService: UserdataService) {
+  constructor(location: Location, public userdataService: UserdataService, private balancedataService: BalancedataService) {
     this.location = location;
+    userdataService.isLogged();
+    balancedataService.getBalance()
+      .valueChanges().subscribe(balance => {
+        this.userdataService.balance = balance;
+        this.userdataService.balance.total =
+        this.userdataService.balance.income.totalIncome -
+        this.userdataService.balance.expenses.totalExpenses;
+      });
   }
 
   ngOnInit() {
