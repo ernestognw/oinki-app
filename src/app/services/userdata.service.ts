@@ -4,21 +4,33 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase/app';
-import { BalancedataService } from './balancedata.service';
 
 @Injectable()
 export class UserdataService {
   API_ENDPOINT = 'https://oinkiimx.firebaseio.com/';
   showbars = true;
   currentUser: any = {};
+  uid = null;
   balance: any = {};
+  loggedIn: boolean;
 
   constructor(
     private afDB: AngularFireDatabase,
     private router: Router,
     private angularFireAuth: AngularFireAuth,
   ) {
-    this.balance = false;
+    this.isLogged()
+    .subscribe((result) => {
+      if (result && result.uid) {
+        this.loggedIn = true;
+        this.currentUser = this.getUserData();
+        this.uid = this.currentUser.uid;
+      } else {
+        this.loggedIn = false;
+      }
+    }, (error) => {
+      this.loggedIn = false;
+    });
   }
 
   public facebookLogin() {
@@ -37,6 +49,8 @@ export class UserdataService {
               totalExpenses: 0
             }
           },
+          result.additionalUserInfo.profile.uid = result.user.uid;
+          result.additionalUserInfo.profile.app_data.totalSavings = 0;
           this.afDB.database.ref('users/' + result.user.uid).set(result.additionalUserInfo.profile);
         }
         this.router.navigate(['dashboard']);
@@ -70,5 +84,10 @@ export class UserdataService {
     } else {
       this.showbars = true;
     }
+  }
+
+  public getBalance() {
+    const user = this.getUserData();
+    return this.afDB.object('users/' + 'hHZmDw4urnSPwBrv4QdF8BsSGLY2' + '/app_data/');
   }
 }

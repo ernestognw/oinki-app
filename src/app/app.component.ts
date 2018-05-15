@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LocationStrategy, PlatformLocation, Location} from '@angular/common';
 import { UserdataService } from './services/userdata.service';
 import { BalancedataService } from './services/balancedata.service';
+import { debug } from 'util';
 
 declare var $: any;
 
@@ -16,14 +17,27 @@ export class AppComponent implements OnInit {
 
   constructor(location: Location, public userdataService: UserdataService, private balancedataService: BalancedataService) {
     this.location = location;
-    userdataService.isLogged();
-    balancedataService.getBalance()
-      .valueChanges().subscribe(balance => {
-        this.userdataService.balance = balance;
-        this.userdataService.balance.total =
-        this.userdataService.balance.income.totalIncome -
-        this.userdataService.balance.expenses.totalExpenses;
+
+    this.userdataService.balance.totalSavings = 0;
+      this.userdataService.balance.income = {
+        totalIncome: 0,
+      },
+      this.userdataService.balance.expenses = {
+        totalExpenses: 0,
+      };
+
+    console.log(this.userdataService.uid);
+
+    // Fix logged verification
+    if (true) {
+      userdataService.getBalance()
+        .valueChanges().subscribe(balance => {
+          this.userdataService.balance = balance;
+          this.userdataService.balance.totalSavings =
+          this.userdataService.balance.income.totalIncome -
+          this.userdataService.balance.expenses.totalExpenses;
       });
+    }
   }
 
   ngOnInit() {
