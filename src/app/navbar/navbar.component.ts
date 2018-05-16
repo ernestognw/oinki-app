@@ -13,6 +13,18 @@ export class NavbarComponent implements OnInit {
 
   constructor(location: Location, public userdataService: UserdataService) {
     this.location = location;
+    this.userdataService.isLogged()
+    .subscribe(result => {
+      if (result && result.uid) {
+        console.log(result);
+        this.userdataService.loggedIn = true;
+        this.userdataService.currentUser = this.userdataService.getUserData();
+      } else {
+        this.userdataService.loggedIn = false;
+      }
+    }, (error) => {
+      this.userdataService.loggedIn = false;
+    });
   }
 
   logout() {

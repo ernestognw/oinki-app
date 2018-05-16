@@ -4,8 +4,8 @@
       <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-3.jpg)"></div>
   </div>
   <div [ngClass]="{'main-panel':userdataService.showbars === true}">
-      <app-navbar *ngIf="userdataService.showbars"></app-navbar>
+      <app-navbar [ngClass]="{'invisible-bars':userdataService.showbars === false}"></app-navbar>
       <router-outlet (activate)="userdataService.barsOrNot()"></router-outlet>
-      <app-footer *ngIf="userdataService.showbars"></app-footer>
+      <app-footer [ngClass]="{'invisible-bars':userdataService.showbars === false}"></app-footer>
   </div>
 </div>

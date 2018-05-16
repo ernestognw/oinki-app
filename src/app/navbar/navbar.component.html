@@ -32,20 +32,20 @@
                   </ul>
               </li> -->
               <li *ngIf="!userdataService.loggedIn" class="nav-item">
-                  <a routerLink="login" class="dropdown-toggle" data-toggle="dropdown">
+                  <a routerLink="login" class="nav-link">
                      <i class="material-icons">account_circle</i>
                      <p>Login</p>
                   </a>
               </li>
 
               <li *ngIf="!userdataService.loggedIn" class="nav-item highlight">
-                  <a routerLink="register" class="dropdown-toggle" data-toggle="dropdown">
+                  <a routerLink="register" class="nav-link">
                      <i class="material-icons">person_add</i>
                      <p>Regístrate</p>
                   </a>
               </li>
 
-              <li *ngIf="userdataService.loggedIn" class="dropdown nav-item highlight">
+              <li class="dropdown nav-item highlight">
                   <a class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown">
                     <img *ngIf="userdataService.currentUser.photoURL" width="30" height="30" src="{{ userdataService.currentUser.photoURL }}" alt="Circle Image" class="rounded-circle img-fluid">
                     <p class="profile-name">{{ userdataService.currentUser.displayName }}</p>
@@ -55,7 +55,7 @@
                   <div class="dropdown-menu dropdown-menu-right">
                       <h6 class="dropdown-header">{{ userdataService.currentUser.displayName }}</h6>
                       <a routerLink="/profile/{{ userdataService.uid }}" class="dropdown-item"><i class="material-icons">face</i>Perfil de Usuario</a>
-                      <a (click)="logout()" class="dropdown-item"><i class="material-icons">exit_to_app</i>Salir de mi cuenta</a>
+                      <a (click)="logout()" class=""><i class="material-icons">exit_to_app</i>Salir de mi cuenta</a>
                   </div>
               </li>
           </ul>

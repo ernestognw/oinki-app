@@ -19,24 +19,19 @@ export class UserdataService {
     private router: Router,
     private angularFireAuth: AngularFireAuth,
   ) {
+    this.setBalanceToZero();
     this.isLogged()
     .subscribe(result => {
       if (result && result.uid) {
-        this.loggedIn = true;
         this.currentUser = this.getUserData();
         this.uid = this.currentUser.uid;
         this.getBalance(this.uid)
         .valueChanges().subscribe(balance => {
-          this.balance = balance;
-          this.balance.totalSavings =
-          this.balance.income.totalIncome -
-          this.balance.expenses.totalExpenses;
-      });
-      } else {
-        this.loggedIn = false;
+          this.setBalanceToUserData(balance);
+        });
       }
     }, (error) => {
-      this.loggedIn = false;
+        this.setBalanceToZero();
     });
   }
 
@@ -48,17 +43,7 @@ export class UserdataService {
         console.log(result);
         alert('Usuario loggeado con Facebook');
         if (result.additionalUserInfo.isNewUser) {
-          result.additionalUserInfo.profile.app_data = {
-            income: {
-              totalIncome: 0
-            },
-            expenses: {
-              totalExpenses: 0
-            }
-          },
-          result.additionalUserInfo.profile.uid = result.user.uid;
-          result.additionalUserInfo.profile.app_data.totalSavings = 0;
-          this.afDB.database.ref('users/' + result.user.uid).set(result.additionalUserInfo.profile);
+          this.saveNewUserData(result);
         }
         this.router.navigate(['dashboard']);
       })
@@ -76,12 +61,7 @@ export class UserdataService {
     alert('Sesión cerrada');
     this.router.navigate(['dashboard']);
     this.balance.totalSavings = 0;
-      this.balance.income = {
-        totalIncome: 0,
-      },
-      this.balance.expenses = {
-        totalExpenses: 0,
-      };
+    this.setBalanceToZero();
   }
 
   public getUserData() {
@@ -102,5 +82,38 @@ export class UserdataService {
 
   public getBalance(uid) {
     return this.afDB.object('users/' + uid + '/app_data/');
+  }
+
+  // Private Functions
+
+  private setBalanceToZero() {
+    this.balance.totalSavings = 0;
+    this.balance.income = {
+      totalIncome: 0,
+    },
+    this.balance.expenses = {
+      totalExpenses: 0,
+    };
+  }
+
+  private setBalanceToUserData(balance) {
+    balance.totalSavings =
+    balance.income.totalIncome -
+    balance.expenses.totalExpenses;
+    this.balance = balance;
+  }
+
+  private saveNewUserData(result) {
+    result.additionalUserInfo.profile.app_data = {
+      income: {
+        totalIncome: 0
+      },
+      expenses: {
+        totalExpenses: 0
+      }
+    },
+    result.additionalUserInfo.profile.uid = result.user.uid;
+    result.additionalUserInfo.profile.app_data.totalSavings = 0;
+    this.afDB.database.ref('users/' + result.user.uid).set(result.additionalUserInfo.profile);
   }
 }

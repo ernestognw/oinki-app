@@ -16,14 +16,6 @@ export class AppComponent implements OnInit {
 
   constructor(location: Location, public userdataService: UserdataService, private balancedataService: BalancedataService) {
     this.location = location;
-
-    this.userdataService.balance.totalSavings = 0;
-      this.userdataService.balance.income = {
-        totalIncome: 0,
-      },
-      this.userdataService.balance.expenses = {
-        totalExpenses: 0,
-      };
   }
 
   ngOnInit() {
