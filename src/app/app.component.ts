@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {LocationStrategy, PlatformLocation, Location} from '@angular/common';
 import { UserdataService } from './services/userdata.service';
 import { BalancedataService } from './services/balancedata.service';
-import { debug } from 'util';
 
 declare var $: any;
 
@@ -25,19 +24,6 @@ export class AppComponent implements OnInit {
       this.userdataService.balance.expenses = {
         totalExpenses: 0,
       };
-
-    console.log(this.userdataService.uid);
-
-    // Fix logged verification
-    if (true) {
-      userdataService.getBalance()
-        .valueChanges().subscribe(balance => {
-          this.userdataService.balance = balance;
-          this.userdataService.balance.totalSavings =
-          this.userdataService.balance.income.totalIncome -
-          this.userdataService.balance.expenses.totalExpenses;
-      });
-    }
   }
 
   ngOnInit() {

@@ -20,11 +20,18 @@ export class UserdataService {
     private angularFireAuth: AngularFireAuth,
   ) {
     this.isLogged()
-    .subscribe((result) => {
+    .subscribe(result => {
       if (result && result.uid) {
         this.loggedIn = true;
         this.currentUser = this.getUserData();
         this.uid = this.currentUser.uid;
+        this.getBalance(this.uid)
+        .valueChanges().subscribe(balance => {
+          this.balance = balance;
+          this.balance.totalSavings =
+          this.balance.income.totalIncome -
+          this.balance.expenses.totalExpenses;
+      });
       } else {
         this.loggedIn = false;
       }
@@ -68,6 +75,13 @@ export class UserdataService {
     this.angularFireAuth.auth.signOut();
     alert('Sesión cerrada');
     this.router.navigate(['dashboard']);
+    this.balance.totalSavings = 0;
+      this.balance.income = {
+        totalIncome: 0,
+      },
+      this.balance.expenses = {
+        totalExpenses: 0,
+      };
   }
 
   public getUserData() {
@@ -86,8 +100,7 @@ export class UserdataService {
     }
   }
 
-  public getBalance() {
-    const user = this.getUserData();
-    return this.afDB.object('users/' + 'hHZmDw4urnSPwBrv4QdF8BsSGLY2' + '/app_data/');
+  public getBalance(uid) {
+    return this.afDB.object('users/' + uid + '/app_data/');
   }
 }
