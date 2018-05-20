@@ -29,6 +29,9 @@ export class UserdataService {
         .valueChanges().subscribe(balance => {
           this.setBalanceToUserData(balance);
         });
+        this.router.navigate(['dashboard']);
+      } else {
+        this.router.navigate(['landing']);
       }
     }, (error) => {
         this.setBalanceToZero();
@@ -73,7 +76,7 @@ export class UserdataService {
   }
 
   public barsOrNot() {
-    if (this.router.url === '/login') {
+    if (this.router.url === '/login' || this.router.url === '/landing') {
       this.showbars = false;
     } else {
       this.showbars = true;

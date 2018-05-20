@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'Oinkii';
   location: Location;
 
-  constructor(location: Location, public userdataService: UserdataService, private balancedataService: BalancedataService) {
+  constructor(location: Location, public userdataService: UserdataService) {
     this.location = location;
   }
 
