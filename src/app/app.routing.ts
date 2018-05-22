@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -11,12 +11,12 @@ import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
-      { path: '', component: DashboardComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'profile/:id', component: ProfileComponent },
-      { path: 'balance', component: BalanceComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'landing', component: LandingComponent}
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'profile/:id', component: ProfileComponent },
+    { path: 'balance', component: BalanceComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'landing', component: LandingComponent}
 ];
 
 @NgModule({
@@ -25,12 +25,7 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
-  ],
   exports: [
-    RouterModule
   ],
 })
 export class AppRoutingModule { }
-

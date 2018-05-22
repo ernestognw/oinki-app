@@ -1,117 +1,108 @@
 <div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card card-profile">
-          <div class="card-avatar">
-            <a href="#pablo">
-              <img class="img" src="{{ profile.photoURL }}" />
-            </a>
-          </div>
-
-          <div class="content">
-            <h6 class="category text-gray">CEO / Co-Founder</h6>
-            <h4 class="card-title">{{ profile.name }}</h4>
-            <p class="card-content">
-              Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye
-              I love Rick Owens’ bed design but the back is...
-            </p>
-            <a href="#pablo" class="btn btn-danger btn-round">Follow</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header" data-background-color="red">
-            <h4 class="title">Edit Profile</h4>
-            <p class="category">Complete your profile</p>
-          </div>
-          <div class="card-content">
-            <form>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group profile-data">
-                    <label class="control-label">Nombre</label>
-                    <input type="text" class="form-control" value="{{ profile.first_name }}" placeholder="Nombre">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group profile-data">
-                    <label class="control-label">Segundo Nombre</label>
-                    <input type="text" class="form-control" value="{{ profile.middle_name }}" placeholder="Segundo Nombre">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group profile-data">
-                    <label class="control-label">Apellido</label>
-                    <input type="text" class="form-control" value="{{ profile.last_name }}" placeholder="Apellido">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group profile-data">
-                    <label class="control-label">Correo Electrónico</label>
-                    <input type="text" class="form-control" value="{{ profile.email }}" placeholder="Correo Electrónico">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group profile-data">
-                    <label class="control-label">Fecha de Nacimiento</label>
-                    <input class="form-control" type="text" value=""/>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group profile-data">
-                    <label class="control-label">Ciudad</label>
-                    <input type="text" class="form-control" placeholder="Ciudad">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group profile-data">
-                    <label class="control-label">País</label>
-                    <input type="text" class="form-control" placeholder="País">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group profile-data">
-                    <label class="control-label">Código Postal</label>
-                    <input type="text" class="form-control" placeholder="Código Postal">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group profile-data">
-                    <label class="control-label">Dirección</label>
-                    <input type="text" class="form-control" placeholder="Dirección">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>About Me</label>
-                    <div class="form-group profile-data">
-                      <label class="control-label"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                      <textarea class="form-control" rows="2"></textarea>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img class="img" src="{{ profile.photoURL }}" />
+                        </a>
                     </div>
-                  </div>
-                </div>
-              </div>
 
-              <button type="submit" class="btn btn-danger pull-right">Update Profile</button>
-              <div class="clearfix"></div>
-            </form>
-          </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                        <h4 class="card-title">{{ profile.name }}</h4>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye
+                            I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="#pablo" class="btn btn-danger btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Edit Profile</h4>
+                        <p class="card-category">Complete your profile</p>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Primer Nombre" type="text" value="{{ profile.first_name }}">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Segundo Nombre" type="text" value="{{ profile.middle_name }}">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Apellido" type="text" value="{{ profile.last_name }}">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Correo Electrónico" type="email" value="{{ profile.email }}">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Fecha de Nacimiento" type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Ciudad" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="País" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Código Postal" type="number">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Dirección" type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>About Me</label>
+                                        <div class="form-group">
+                                            <label class="control-label"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                            <textarea class="form-control" rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

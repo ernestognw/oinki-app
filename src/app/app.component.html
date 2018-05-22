@@ -1,11 +1,12 @@
 <div class="wrapper">
-  <div class="sidebar" data-color='purple' data-image="">
-      <app-sidebar *ngIf="userdataService.showbars"></app-sidebar>
-      <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-3.jpg)"></div>
+    <div [ngClass]="{'invisible-bars':userdataService.showbars === false}" class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-3.jpg">
+        <app-sidebar></app-sidebar>
+        <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-1.jpg)"></div>
+    </div>
+    <div [ngClass]="{'main-panel':userdataService.showbars === true}">
+        <app-navbar *ngIf="userdataService.showbars"></app-navbar>
+        <router-outlet (activate)="userdataService.barsOrNot()"></router-outlet>
+        <app-footer *ngIf="userdataService.showbars"></app-footer>
+    </div>
   </div>
-  <div [ngClass]="{'main-panel':userdataService.showbars === true}">
-      <app-navbar [ngClass]="{'invisible-bars':userdataService.showbars === false}"></app-navbar>
-      <router-outlet (activate)="userdataService.barsOrNot()"></router-outlet>
-      <app-footer [ngClass]="{'invisible-bars':userdataService.showbars === false}"></app-footer>
-  </div>
-</div>
+  

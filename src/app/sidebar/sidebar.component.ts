@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { UserdataService } from '../services/userdata.service';
 
-declare var $: any;
+declare const $: any;
+declare interface RouteInfo {
+    path: string;
+    title: string;
+    icon: string;
+}
+export const ROUTES: RouteInfo[] = [
+    { path: 'dashboard', title: 'Dashboard',  icon: 'dashboard'},
+    { path: 'balance', title: 'Registro de Ahorro',  icon: 'content_paste'},
+];
 
 @Component({
   selector: 'app-sidebar',
@@ -8,11 +18,22 @@ declare var $: any;
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  menuItems: any[];
 
-  constructor() { }
+  constructor(public userdataService: UserdataService) { }
+
   ngOnInit() {
-    $.getScript('../../assets/js/sidebar-moving-tab.js');
+    this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
 
-}
+  isMobileMenu() {
+      if ($(window).width() > 991) {
+          return false;
+      }
+      return true;
+  };
 
+  logout() {
+    this.userdataService.logout();
+  }
+}

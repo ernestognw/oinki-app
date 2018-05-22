@@ -14,14 +14,40 @@
   top: 2px;
 }
 
-.card-title,
-.currency {
+.card-primary {
+    padding-bottom: 12px;
+}
+
+.card-category {
+    padding-top: 15px;
+}
+
+.card-title {
   display: inline;
 }
 
 .card .card-footer {
   margin: 0 20px;
   padding-top: 0px;
+}
+
+.card-title strong {
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.card-header {
+    margin: 0px 20px 0;
+}
+
+.card-header .currency {
+    color: #000;
+}
+
+h5 {
+    font-size: 1.25em !important;
+    margin-bottom: 15px !important;
 }
 
 .modal-body {
@@ -113,4 +139,8 @@
 }
 .progress.progress-line-danger {
   background: rgba(244, 67, 54, 0.2);
+}
+
+strong {
+    font-weight: 700;
 }

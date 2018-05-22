@@ -29,9 +29,9 @@ export class UserdataService {
         .valueChanges().subscribe(balance => {
           this.setBalanceToUserData(balance);
         });
-        this.router.navigate(['dashboard']);
+        // this.router.navigate(['dashboard']);
       } else {
-        this.router.navigate(['landing']);
+        // this.router.navigate(['landing']);
       }
     }, (error) => {
         this.setBalanceToZero();

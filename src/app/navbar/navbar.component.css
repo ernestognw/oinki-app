@@ -1,19 +1,5 @@
-a {
-  text-transform: none;
-}
-
 p {
-  display: inline-block;
   margin-bottom: 0;
-}
-
-.dropdown-item {
-  z-index: 1000;
-}
-
-.log-button {
-  font-weight: 100;
-  padding: 15px 2px;
 }
 
 .navbar {
@@ -25,22 +11,30 @@ p {
   background-color: rgba(240, 240, 240, 0.5);
 }
 
-.rounded-circle {
-  border-radius: 50%;
-}
-
 .material-icons {
   font-size: 18px;
   padding: 2px;
   margin-right: 2px;
 }
 
-.profile-name {
-  text-transform: none;
-  padding: 1rem;
+
+.navbar .navbar-collapse .navbar-nav .nav-item .nav-link p {
+    display: inline-block;
 }
 
-.img-fluid {
-  max-width: 100%;
-  height: auto;
+.navbar .collapse .navbar-nav .nav-item .nav-link {
+    padding: 15px 15px;
 }
+
+.navbar-light .navbar-toggler {
+    color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
+}
+
+.profile-name {
+  text-transform: none;
+  padding: 0 1rem;
+}
+
+

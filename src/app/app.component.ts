@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {LocationStrategy, PlatformLocation, Location} from '@angular/common';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
+import 'rxjs/add/operator/filter';
+import { NavbarComponent } from './navbar/navbar.component';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import PerfectScrollbar from 'perfect-scrollbar';
 import { UserdataService } from './services/userdata.service';
-import { BalancedataService } from './services/balancedata.service';
 
-declare var $: any;
+declare const $: any;
 
 @Component ({
   selector: 'app-root',
@@ -12,26 +16,13 @@ declare var $: any;
 })
 export class AppComponent implements OnInit {
   title = 'Oinkii';
-  location: Location;
+  private _router: Subscription;
+  private lastPoppedUrl: string;
+  private yScrollStack: number[] = [];
 
-  constructor(location: Location, public userdataService: UserdataService) {
-    this.location = location;
-  }
+  constructor(public location: Location, private router: Router, public userdataService: UserdataService) { }
 
   ngOnInit() {
-    $.getScript('../../../assets/js/material-dashboard.js');
-    $.getScript('../../../assets/js/initMenu.js');
-  }
-
-  isMaps(path) {
-    let titlee = this.location.prepareExternalUrl(this.location.path());
-    titlee = titlee.slice( 1 );
-
-    if (path === titlee) {
-      return false;
-    } else {
-      return true;
-    }
   }
 
 }
