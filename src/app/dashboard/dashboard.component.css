@@ -1,3 +1,13 @@
+h4.goal-title {
+    display: inline;
+}
+
+.badge {
+    font-size: 100%;
+    float: right;
+    margin-left: 5px;
+}
+
 .btn-sm {
   padding: 5px 10px;
   margin-bottom: 10px;
@@ -50,16 +60,9 @@ h5 {
     margin-bottom: 15px !important;
 }
 
-.modal-body {
-  padding-right: 17%;
-}
-
-.modal-footer button {
-  margin-bottom: 15px;
-}
-
 .progress {
   overflow: hidden;
+  margin-top: 11px;
 }
 
 .progress-bar {

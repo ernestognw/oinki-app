@@ -13,13 +13,17 @@ export class UserdataService {
   uid = null;
   balance: any = {};
   loggedIn: boolean;
+  listaIngresos = null;
+  listaGastos = null;
 
   constructor(
     private afDB: AngularFireDatabase,
     private router: Router,
     private angularFireAuth: AngularFireAuth,
   ) {
+    // Set Dashboard Balance Info
     this.setBalanceToZero();
+    this.setRecordsToNull();
     this.isLogged()
     .subscribe(result => {
       if (result && result.uid) {
@@ -29,9 +33,19 @@ export class UserdataService {
         .valueChanges().subscribe(balance => {
           this.setBalanceToUserData(balance);
         });
-        // this.router.navigate(['dashboard']);
+
+        // Set savings records
+        this.getRegistroIngresos(this.uid)
+            .valueChanges().subscribe( registro => {
+                console.log(registro);
+                this.listaIngresos = registro;
+        });
+        this.getRegistroGastos(this.uid)
+            .valueChanges().subscribe( registro => {
+                console.log(registro);
+                this.listaGastos = registro;
+        });
       } else {
-        // this.router.navigate(['landing']);
       }
     }, (error) => {
         this.setBalanceToZero();
@@ -65,6 +79,7 @@ export class UserdataService {
     this.router.navigate(['dashboard']);
     this.balance.totalSavings = 0;
     this.setBalanceToZero();
+    this.setRecordsToNull();
   }
 
   public getUserData() {
@@ -76,7 +91,7 @@ export class UserdataService {
   }
 
   public barsOrNot() {
-    if (this.router.url === '/login' || this.router.url === '/landing') {
+    if (this.router.url === '/login') {
       this.showbars = false;
     } else {
       this.showbars = true;
@@ -86,6 +101,7 @@ export class UserdataService {
   public getBalance(uid) {
     return this.afDB.object('users/' + uid + '/app_data/');
   }
+
 
   // Private Functions
 
@@ -97,6 +113,11 @@ export class UserdataService {
     this.balance.expenses = {
       totalExpenses: 0,
     };
+  }
+
+  private setRecordsToNull() {
+      this.listaGastos = null;
+      this.listaIngresos = null;
   }
 
   private setBalanceToUserData(balance) {
@@ -118,5 +139,13 @@ export class UserdataService {
     result.additionalUserInfo.profile.uid = result.user.uid;
     result.additionalUserInfo.profile.app_data.totalSavings = 0;
     this.afDB.database.ref('users/' + result.user.uid).set(result.additionalUserInfo.profile);
+  }
+
+  private getRegistroIngresos(uid) {
+    return this.afDB.list('users/' + uid + '/app_data/income');
+  }
+
+  private getRegistroGastos(uid) {
+    return this.afDB.list('/users/' + uid + '/app_data/expenses/');
   }
 }

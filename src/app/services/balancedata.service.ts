@@ -15,7 +15,7 @@ export class BalancedataService {
     this.afDB.database.ref('users/' + uid + '/app_data/income/' + income.id).set(income);
     this.afDB.database.ref('users/' + uid + '/app_data/totalSavings').set(this.userdataService.balance.totalSavings);
     this.afDB.database.ref('users/' + uid + '/app_data/income/totalIncome').set(this.userdataService.balance.income.totalIncome);
-    alert('Gasto registrado correctamente');
+    alert('Ingreso registrado correctamente');
   }
 
   public expensesRecord(expenses) {

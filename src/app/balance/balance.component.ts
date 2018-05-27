@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserdataService } from '../services/userdata.service';
 
 @Component({
   selector: 'app-balance',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BalanceComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userdataService: UserdataService) {
+  }
 
   ngOnInit() {
   }
