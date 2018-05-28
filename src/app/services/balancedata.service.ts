@@ -28,6 +28,73 @@ export class BalancedataService {
     alert('Gasto registrado correctamente');
   }
 
+  public editIncomeRecord(i) {
+    if (this.userdataService.listaIngresos[i].quantity !== this.userdataService.oldValueIngresos[i]) {
+        const uid = this.userdataService.getUserData().uid;
+
+        this.userdataService.balance.income.totalIncome =
+            this.userdataService.balance.income.totalIncome -
+            this.userdataService.oldValueIngresos[i] +
+            this.userdataService.listaIngresos[i].quantity;
+
+        this.userdataService.balance.totalSavings =
+            this.userdataService.balance.totalSavings -
+            this.userdataService.oldValueIngresos[i] +
+            this.userdataService.listaIngresos[i].quantity;
+
+        this.afDB.database
+        .ref('users/' + uid + '/app_data/income/' + this.userdataService.listaIngresos[i].id)
+        .set(this.userdataService.listaIngresos[i]);
+        alert('Ingreso editado con éxito');
+
+        this.afDB.database.ref('users/' + uid + '/app_data/totalSavings').set(this.userdataService.balance.totalSavings);
+        this.afDB.database.ref('users/' + uid + '/app_data/income/totalIncome').set(this.userdataService.balance.income.totalIncome);
+    } else {
+        alert('Cambio no realizado');
+    }
+    this.userdataService.editListaIngresos[i] = false;
+  }
+
+  public editExpensesRecord(i) {
+    if (this.userdataService.listaGastos[i].quantity !== this.userdataService.oldValueGastos[i]) {
+        const uid = this.userdataService.getUserData().uid;
+
+        this.userdataService.balance.expenses.totalExpenses =
+            this.userdataService.balance.expenses.totalExpenses -
+            this.userdataService.oldValueGastos[i] +
+            this.userdataService.listaGastos[i].quantity;
+
+        this.userdataService.balance.totalSavings =
+            this.userdataService.balance.totalSavings +
+            this.userdataService.oldValueGastos[i] -
+            this.userdataService.listaGastos[i].quantity;
+
+        this.afDB.database
+        .ref('users/' + uid + '/app_data/expenses/' + this.userdataService.listaGastos[i].id)
+        .set(this.userdataService.listaGastos[i]);
+        alert('Ingreso editado con éxito');
+
+        this.afDB.database.ref('users/' + uid + '/app_data/totalSavings').set(this.userdataService.balance.totalSavings);
+        // tslint:disable-next-line:max-line-length
+        this.afDB.database.ref('users/' + uid + '/app_data/expenses/totalExpenses').set(this.userdataService.balance.expenses.totalExpenses);
+    } else {
+        alert('Cambio no realizado');
+    }
+    this.userdataService.editListaGastos[i] = false;
+  }
+
+  public saveOldValueIngresos(i, value) {
+    this.userdataService.oldValueIngresos[i] = value;
+    console.log(value);
+    this.userdataService.editListaIngresos[i] = true;
+  }
+
+  public saveOldValueGastos(i, value) {
+    this.userdataService.oldValueGastos[i] = value;
+    console.log(value);
+    this.userdataService.editListaGastos[i] = true;
+  }
+
 }
 
     // this.uid = this.userdataService.getUserData().uid;

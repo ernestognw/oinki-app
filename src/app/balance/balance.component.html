@@ -3,41 +3,62 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header card-header-success">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
                         <h4 class="card-title ">Ingresos</h4>
-                        <p class="card-category">Aquí se presenta un resumen del dinero que has ingresado a tu <strong>Oinkii</strong> y otra información</p>
                     </div>
                     <div class="card-body">
-                        <p *ngIf="userdataService.listaIngresos === null" class="card-text">Aún no tienes ingresos en tu <strong>Oinkii</strong></p>                        
-                        <div class="table-responsive" *ngIf="userdataService.listaIngresos !== null">
+                        <p *ngIf="userdataService.listaGastos === null" class="card-text">Aún no tienes gastos en tu
+                            <strong>Oinkii</strong>
+                        </p>
+                        <div class="table-responsive" *ngIf="userdataService.listaGastos !== null">
                             <table class="table">
-                                <thead class=" text-primary">
+                                <thead class="text-primary">
                                     <th>
                                         Fecha
-                                    </th>
-                                    <th>
-                                        Hora
                                     </th>
                                     <th>
                                         Concepto
                                     </th>
                                     <th>
-                                        Cantidad
+                                        Cant.
+                                    </th>
+                                    <th>
                                     </th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let ingreso of userdataService.listaIngresos">
+                                    <tr *ngFor="let ingreso of userdataService.listaIngresos; let i = index">
                                         <td *ngIf="ingreso.id">
-                                            {{ ingreso.id | date }}
+                                            {{ ingreso.id | date:'mediumDate' }}
+                                            <br> {{ ingreso.id | date:'shortTime' }}
                                         </td>
-                                        <td *ngIf="ingreso.id">
-                                            {{ ingreso.id | date:'shortTime'}}
-                                        </td>
-                                        <td *ngIf="ingreso.id">
+                                        <td *ngIf="ingreso.id && userdataService.editListaIngresos[i] === false">
                                             {{ ingreso.concept }}
                                         </td>
-                                        <td class="text-primary" *ngIf="ingreso.id">
+                                        <td class="text-primary" *ngIf="ingreso.id && userdataService.editListaIngresos[i] === false">
                                             ${{ ingreso.quantity }}
+                                        </td>
+                                        <td *ngIf="ingreso.id && userdataService.editListaIngresos[i] === true">
+                                            <input class="form-control" placeholder="Concepto" type="text" [(ngModel)]="ingreso.concept" >
+                                        </td>
+                                        <td class="text-primary" *ngIf="ingreso.id && userdataService.editListaIngresos[i] === true">
+                                            <input class="form-control" placeholder="Cantidad" type="number" [(ngModel)]="ingreso.quantity" >
+                                        </td>
+                                        <td class="td-actions text-right" *ngIf="ingreso.id">
+
+                                            <button mat-raised-button="" type="button" class="btn btn-link btn-info" (click)="saveOldValueIngresos(i, ingreso.quantity)" *ngIf="userdataService.editListaIngresos[i] === false">
+                                                <span class="mat-button-wrapper">
+                                                    <i class="material-icons">edit</i>
+                                                </span>
+                                            </button>
+
+                                            <button mat-raised-button="" type="button" class="btn btn-link btn-success" (click)="editRecordIngresos(i)" *ngIf="userdataService.editListaIngresos[i] === true">
+                                                <span class="mat-button-wrapper">
+                                                    <i class="material-icons">done</i>
+                                                </span>
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -48,41 +69,62 @@
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header card-header-danger">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
                         <h4 class="card-title ">Gastos</h4>
-                        <p class="card-category">Aquí se presenta un resumen del dinero que has sacado de tu <strong>Oinkii</strong> y otra información</p>
                     </div>
                     <div class="card-body">
-                        <p *ngIf="userdataService.listaGastos === null" class="card-text">Aún no tienes gastos en tu <strong>Oinkii</strong></p>
+                        <p *ngIf="userdataService.listaGastos === null" class="card-text">Aún no tienes gastos en tu
+                            <strong>Oinkii</strong>
+                        </p>
                         <div class="table-responsive" *ngIf="userdataService.listaGastos !== null">
                             <table class="table">
-                                <thead class=" text-primary">
+                                <thead class="text-primary">
                                     <th>
                                         Fecha
-                                    </th>
-                                    <th>
-                                        Hora
                                     </th>
                                     <th>
                                         Concepto
                                     </th>
                                     <th>
-                                        Cantidad
+                                        Cant.
+                                    </th>
+                                    <th>
                                     </th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let gasto of userdataService.listaGastos">
+                                    <tr *ngFor="let gasto of userdataService.listaGastos; let i = index">
                                         <td *ngIf="gasto.id">
-                                            {{ gasto.id | date }}
+                                            {{ gasto.id | date:'mediumDate' }}
+                                            <br> {{ gasto.id | date:'shortTime' }}
                                         </td>
-                                        <td *ngIf="gasto.id">
-                                            {{ gasto.id | date:'shortTime' }}
-                                        </td>
-                                        <td *ngIf="gasto.id">
+                                        <td *ngIf="gasto.id && userdataService.editListaGastos[i] === false">
                                             {{ gasto.concept }}
                                         </td>
-                                        <td class="text-primary" *ngIf="gasto.id">
+                                        <td class="text-primary" *ngIf="gasto.id && userdataService.editListaGastos[i] === false">
                                             ${{ gasto.quantity }}
+                                        </td>
+                                        <td *ngIf="gasto.id && userdataService.editListaGastos[i] === true">
+                                            <input class="form-control" placeholder="Concepto" type="text" [(ngModel)]="gasto.concept" >
+                                        </td>
+                                        <td class="text-primary" *ngIf="gasto.id && userdataService.editListaGastos[i] === true">
+                                            <input class="form-control" placeholder="Cantidad" type="number" [(ngModel)]="gasto.quantity" >
+                                        </td>
+                                        <td class="td-actions text-right" *ngIf="gasto.id">
+
+                                            <button mat-raised-button="" type="button" class="btn btn-link btn-info" (click)="saveOldValueGastos(i, gasto.quantity)" *ngIf="userdataService.editListaGastos[i] === false">
+                                                <span class="mat-button-wrapper">
+                                                    <i class="material-icons">edit</i>
+                                                </span>
+                                            </button>
+
+                                            <button mat-raised-button="" type="button" class="btn btn-link btn-success" (click)="editRecordGastos(i)" *ngIf="userdataService.editListaGastos[i] === true">
+                                                <span class="mat-button-wrapper">
+                                                    <i class="material-icons">done</i>
+                                                </span>
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -94,4 +136,3 @@
         </div>
     </div>
 </div>
-      

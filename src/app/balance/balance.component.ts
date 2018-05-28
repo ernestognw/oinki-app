@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserdataService } from '../services/userdata.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { BalancedataService } from '../services/balancedata.service';
 
 @Component({
   selector: 'app-balance',
@@ -7,11 +9,23 @@ import { UserdataService } from '../services/userdata.service';
   styleUrls: ['./balance.component.css']
 })
 export class BalanceComponent implements OnInit {
+  constructor(public userdataService: UserdataService, private afDB: AngularFireDatabase, private balancedataService: BalancedataService) {}
 
-  constructor(public userdataService: UserdataService) {
+  ngOnInit() {}
+
+  saveOldValueIngresos(i, value) {
+    this.balancedataService.saveOldValueIngresos(i, value);
   }
 
-  ngOnInit() {
+  saveOldValueGastos(i, value) {
+    this.balancedataService.saveOldValueGastos(i, value);
   }
 
+  editRecordIngresos(i) {
+    this.balancedataService.editIncomeRecord(i);
+  }
+
+  editRecordGastos(i) {
+    this.balancedataService.editExpensesRecord(i);
+  }
 }

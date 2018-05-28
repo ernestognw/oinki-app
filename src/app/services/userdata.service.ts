@@ -15,6 +15,10 @@ export class UserdataService {
   loggedIn: boolean;
   listaIngresos = null;
   listaGastos = null;
+  editListaIngresos = [];
+  editListaGastos = [];
+  oldValueGastos = [];
+  oldValueIngresos = [];
 
   constructor(
     private afDB: AngularFireDatabase,
@@ -36,14 +40,28 @@ export class UserdataService {
 
         // Set savings records
         this.getRegistroIngresos(this.uid)
-            .valueChanges().subscribe( registro => {
+            .valueChanges().subscribe(registro => {
                 console.log(registro);
                 this.listaIngresos = registro;
+                let i = 0;
+                this.listaIngresos.forEach(element => {
+                    this.editListaIngresos[i] = false;
+                    this.oldValueIngresos[i] = 0;
+                    this.oldValueGastos[i] = 0;
+                    i++;
+                });
+                console.log(this.editListaGastos);
         });
         this.getRegistroGastos(this.uid)
-            .valueChanges().subscribe( registro => {
+            .valueChanges().subscribe(registro => {
                 console.log(registro);
                 this.listaGastos = registro;
+                let i = 0;
+                this.listaGastos.forEach(element => {
+                    this.editListaGastos[i] = false;
+                    i++;
+                });
+                console.log(this.editListaGastos);
         });
       } else {
       }
@@ -118,6 +136,8 @@ export class UserdataService {
   private setRecordsToNull() {
       this.listaGastos = null;
       this.listaIngresos = null;
+      this.editListaGastos = [];
+      this.editListaIngresos = [];
   }
 
   private setBalanceToUserData(balance) {
