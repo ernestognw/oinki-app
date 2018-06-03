@@ -50,7 +50,11 @@ export class BalancedataService {
         this.afDB.database.ref('users/' + uid + '/app_data/totalSavings').set(this.userdataService.balance.totalSavings);
         this.afDB.database.ref('users/' + uid + '/app_data/income/totalIncome').set(this.userdataService.balance.income.totalIncome);
     } else {
-        alert('Cambio no realizado');
+        if (this.userdataService.listaIngresos[i].concept !== this.userdataService.oldConceptIngresos[i]) {
+            alert('Concepto editado con éxito')
+        } else {
+            alert('Cambio no realizado');
+        }
     }
     this.userdataService.editListaIngresos[i] = false;
   }
@@ -78,21 +82,69 @@ export class BalancedataService {
         // tslint:disable-next-line:max-line-length
         this.afDB.database.ref('users/' + uid + '/app_data/expenses/totalExpenses').set(this.userdataService.balance.expenses.totalExpenses);
     } else {
-        alert('Cambio no realizado');
+        if (this.userdataService.listaGastos[i].concept !== this.userdataService.oldConceptGastos[i]) {
+            alert('Concepto editado con éxito')
+        } else {
+            alert('Cambio no realizado');
+        }
     }
     this.userdataService.editListaGastos[i] = false;
   }
 
-  public saveOldValueIngresos(i, value) {
+  public saveOldValueIngresos(i, value, concept) {
     this.userdataService.oldValueIngresos[i] = value;
+    this.userdataService.oldConceptIngresos[i] = concept;
     console.log(value);
     this.userdataService.editListaIngresos[i] = true;
   }
 
-  public saveOldValueGastos(i, value) {
+  public saveOldValueGastos(i, value, concept) {
     this.userdataService.oldValueGastos[i] = value;
+    this.userdataService.oldConceptGastos[i] = concept;
     console.log(value);
     this.userdataService.editListaGastos[i] = true;
+  }
+
+  public removeIncomeRecord(i) {
+    const uid = this.userdataService.getUserData().uid;
+
+    this.afDB.database
+        .ref('users/' + uid + '/app_data/income/' + this.userdataService.listaIngresos[i].id)
+        .remove();
+
+    this.userdataService.balance.income.totalIncome =
+        this.userdataService.balance.income.totalIncome -
+        this.userdataService.listaIngresos[i].quantity;
+
+    this.userdataService.balance.totalSavings =
+        this.userdataService.balance.totalSavings -
+        this.userdataService.listaIngresos[i].quantity;
+
+    this.afDB.database.ref('users/' + uid + '/app_data/totalSavings').set(this.userdataService.balance.totalSavings);
+    this.afDB.database.ref('users/' + uid + '/app_data/income/totalIncome').set(this.userdataService.balance.income.totalIncome);
+
+    alert('Ingreso eliminado');
+  }
+
+  public removeExpenseRecord(i) {
+    const uid = this.userdataService.getUserData().uid;
+
+    this.afDB.database
+        .ref('users/' + uid + '/app_data/expenses/' + this.userdataService.listaGastos[i].id)
+        .remove();
+
+    this.userdataService.balance.expenses.totalExpenses =
+        this.userdataService.balance.expenses.totalExpenses -
+        this.userdataService.listaGastos[i].quantity;
+
+    this.userdataService.balance.totalSavings =
+        this.userdataService.balance.totalSavings +
+        this.userdataService.listaGastos[i].quantity;
+
+    this.afDB.database.ref('users/' + uid + '/app_data/totalSavings').set(this.userdataService.balance.totalSavings);
+    this.afDB.database.ref('users/' + uid + '/app_data/expenses/totalExpenses').set(this.userdataService.balance.expenses.totalExpenses);
+
+    alert('Gasto eliminado');
   }
 
 }

@@ -9,16 +9,17 @@ import { BalancedataService } from '../services/balancedata.service';
   styleUrls: ['./balance.component.css']
 })
 export class BalanceComponent implements OnInit {
-  constructor(public userdataService: UserdataService, private afDB: AngularFireDatabase, private balancedataService: BalancedataService) {}
+  constructor(public userdataService: UserdataService, private afDB: AngularFireDatabase, private balancedataService: BalancedataService) {
+  }
 
   ngOnInit() {}
 
-  saveOldValueIngresos(i, value) {
-    this.balancedataService.saveOldValueIngresos(i, value);
+  saveOldValueIngresos(i, value, concept) {
+    this.balancedataService.saveOldValueIngresos(i, value, concept);
   }
 
-  saveOldValueGastos(i, value) {
-    this.balancedataService.saveOldValueGastos(i, value);
+  saveOldValueGastos(i, value, concept) {
+    this.balancedataService.saveOldValueGastos(i, value, concept);
   }
 
   editRecordIngresos(i) {
@@ -27,5 +28,13 @@ export class BalanceComponent implements OnInit {
 
   editRecordGastos(i) {
     this.balancedataService.editExpensesRecord(i);
+  }
+
+  removeIncomeRecord(i) {
+    this.balancedataService.removeIncomeRecord(i);
+  }
+
+  removeExpenseRecord(i) {
+      this.balancedataService.removeExpenseRecord(i);
   }
 }

@@ -191,3 +191,44 @@
     </div>
   </div>
 </div>
+
+<!-- Goals Modal -->
+
+<div class="modal fade" id="goalsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Añade una nueva
+            <strong>meta</strong>
+          </h5>
+          <button class="close" type="button" data-dismiss="modal">
+            <i class="material-icons">clear</i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">short_text</i>
+                </span>
+                <input type="text" class="form-control" [(ngModel)]="amount.concept" placeholder="Concepto">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">attach_money</i>
+                </span>
+                <input type="number" class="form-control" [(ngModel)]="amount.quantity" placeholder="Precio">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer text-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" (click)="recordExpenses()" class="btn btn-warning" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

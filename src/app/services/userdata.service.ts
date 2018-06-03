@@ -19,6 +19,8 @@ export class UserdataService {
   editListaGastos = [];
   oldValueGastos = [];
   oldValueIngresos = [];
+  oldConceptGastos = [];
+  oldConceptIngresos = [];
 
   constructor(
     private afDB: AngularFireDatabase,
@@ -41,24 +43,26 @@ export class UserdataService {
         // Set savings records
         this.getRegistroIngresos(this.uid)
             .valueChanges().subscribe(registro => {
-                console.log(registro);
                 this.listaIngresos = registro;
+                console.log(this.listaIngresos);
                 let i = 0;
                 this.listaIngresos.forEach(element => {
                     this.editListaIngresos[i] = false;
                     this.oldValueIngresos[i] = 0;
-                    this.oldValueGastos[i] = 0;
+                    this.oldConceptIngresos[i] = '';
                     i++;
                 });
                 console.log(this.editListaGastos);
         });
         this.getRegistroGastos(this.uid)
             .valueChanges().subscribe(registro => {
-                console.log(registro);
                 this.listaGastos = registro;
+                console.log(this.listaGastos);
                 let i = 0;
                 this.listaGastos.forEach(element => {
                     this.editListaGastos[i] = false;
+                    this.oldValueGastos[i] = 0;
+                    this.oldConceptGastos[i] = '';
                     i++;
                 });
                 console.log(this.editListaGastos);

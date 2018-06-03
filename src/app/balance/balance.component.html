@@ -10,10 +10,10 @@
                         <h4 class="card-title ">Ingresos</h4>
                     </div>
                     <div class="card-body">
-                        <p *ngIf="userdataService.listaGastos === null" class="card-text">Aún no tienes gastos en tu
+                        <p *ngIf="userdataService.listaIngresos == 0" class="card-text">Aún no tienes ingresos en tu
                             <strong>Oinkii</strong>
                         </p>
-                        <div class="table-responsive" *ngIf="userdataService.listaGastos !== null">
+                        <div class="table-responsive" *ngIf="userdataService.listaIngresos != 0">
                             <table class="table">
                                 <thead class="text-primary">
                                     <th>
@@ -48,7 +48,7 @@
                                         </td>
                                         <td class="td-actions text-right" *ngIf="ingreso.id">
 
-                                            <button mat-raised-button="" type="button" class="btn btn-link btn-info" (click)="saveOldValueIngresos(i, ingreso.quantity)" *ngIf="userdataService.editListaIngresos[i] === false">
+                                            <button mat-raised-button="" type="button" class="btn btn-link btn-info" (click)="saveOldValueIngresos(i, ingreso.quantity, ingreso.concept)" *ngIf="userdataService.editListaIngresos[i] === false">
                                                 <span class="mat-button-wrapper">
                                                     <i class="material-icons">edit</i>
                                                 </span>
@@ -59,6 +59,13 @@
                                                     <i class="material-icons">done</i>
                                                 </span>
                                             </button>
+
+                                            <button mat-raised-button="" type="button" class="btn btn-link btn-danger" (click)="removeIncomeRecord(i)">
+                                                <span class="mat-button-wrapper">
+                                                    <i class="material-icons">cancel</i>
+                                                </span>
+                                            </button>
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -76,10 +83,10 @@
                         <h4 class="card-title ">Gastos</h4>
                     </div>
                     <div class="card-body">
-                        <p *ngIf="userdataService.listaGastos === null" class="card-text">Aún no tienes gastos en tu
+                        <p *ngIf="userdataService.listaGastos == 0" class="card-text">Aún no tienes gastos en tu
                             <strong>Oinkii</strong>
                         </p>
-                        <div class="table-responsive" *ngIf="userdataService.listaGastos !== null">
+                        <div class="table-responsive" *ngIf="userdataService.listaGastos != 0">
                             <table class="table">
                                 <thead class="text-primary">
                                     <th>
@@ -114,7 +121,7 @@
                                         </td>
                                         <td class="td-actions text-right" *ngIf="gasto.id">
 
-                                            <button mat-raised-button="" type="button" class="btn btn-link btn-info" (click)="saveOldValueGastos(i, gasto.quantity)" *ngIf="userdataService.editListaGastos[i] === false">
+                                            <button mat-raised-button="" type="button" class="btn btn-link btn-info" (click)="saveOldValueGastos(i, gasto.quantity, gasto.concept)" *ngIf="userdataService.editListaGastos[i] === false">
                                                 <span class="mat-button-wrapper">
                                                     <i class="material-icons">edit</i>
                                                 </span>
@@ -123,6 +130,12 @@
                                             <button mat-raised-button="" type="button" class="btn btn-link btn-success" (click)="editRecordGastos(i)" *ngIf="userdataService.editListaGastos[i] === true">
                                                 <span class="mat-button-wrapper">
                                                     <i class="material-icons">done</i>
+                                                </span>
+                                            </button>
+
+                                            <button mat-raised-button="" type="button" class="btn btn-link btn-danger" (click)="removeExpenseRecord(i)">
+                                                <span class="mat-button-wrapper">
+                                                    <i class="material-icons">cancel</i>
                                                 </span>
                                             </button>
                                         </td>
